@@ -1,5 +1,7 @@
-LABjs (Loading And Blocking JavaScript)
+LABjs (Loading And Blocking JavaScript) with Failure Support
 =======================================
+
+I have added .fail() callback into the script chain.
 
 **NOTE: LABjs is still supported, and still encouraged to be used if it makes sense for your project. But, no further development beyond bug fixes is expected. LABjs is almost 4 years old, and has been stable (no bug fixes/patches) for almost 2 years. Thank you to the community for your support of this project over the last 4 years.**
 
@@ -23,9 +25,13 @@ With LABjs becomes:
     <script src="LAB.js"></script>
     <script>
       $LAB
-      .script("http://remote.tld/jquery.js").wait()
+      .script("http://remote.tld/jquery.js").wait().fail(function(){
+			alert("jquery failed");
+	  })
       .script("/local/plugin1.jquery.js")
-      .script("/local/plugin2.jquery.js").wait()
+      .script("/local/plugin2.jquery.js").wait().fail(function(){
+			alert("jquery plugins failed");
+	  })
       .script("/local/init.js").wait(function(){
           initMyPage();
       });
